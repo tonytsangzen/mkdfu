@@ -20,7 +20,8 @@ download the software :
 	key [address]	: idicated element download address.	
 	key [size]	: max download size 
 	key [essential] : if element must present, set this key to true.
- 	[for mor infomation, see DfuSe File Format Specification](http://rc.fdr.hu/UM0391.pdf)
+ [for mor infomation, see DfuSe File Format Specification](http://rc.fdr.hu/UM0391.pdf)
+ 
 ## License
 
 [GPLv3](https://github.com/Keidan/hex2bin/blob/master/LICENSE)
