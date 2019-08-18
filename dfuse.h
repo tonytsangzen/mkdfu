@@ -13,7 +13,7 @@
 
 /********************************************/
 #define BIGENDINA
-#define DEBUG
+//#define DEBUG
 
 #ifdef BIGENDINA	
 #define ToBig(x)	(x)

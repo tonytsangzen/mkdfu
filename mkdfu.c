@@ -94,9 +94,33 @@ uint32_t  GetHexValue(cJSON* root, char* key, uint32_t preset){
 int main(int argc, char* argv[]){
 	int offset = 0;
 	char* buf;
+	char* layoutFile = NULL;
+	char* outputFile = NULL;
+
+	int ch;       
+	opterr=0;       
+	while((ch=getopt(argc,argv,"l:o:"))!=-1)
+	{       
+		switch(ch)     
+		{       
+			case 'l':      
+				layoutFile = optarg;
+				break;       
+			case 'o':       
+				outputFile = optarg;
+				break;       
+			default:       
+				break;
+		}
+	}
+
+	if(!layoutFile || !outputFile){
+		printf("Usage: mkdfu -l xxx.json -o xxx.dfu\n");
+		return -1;
+	}
 
 	/*parse layout file*/
-	cJSON *layout = ParseJson("stm32f411x.json");
+	cJSON *layout = ParseJson(layoutFile);
 	if(layout == NULL){
 		printf("unable prase layout file\n");
 		return -1;
@@ -153,7 +177,7 @@ int main(int argc, char* argv[]){
 			char* rawdata = ReadFile(elementSource, &len);
 			if(rawdata == NULL){
 				if(elementPresent == 1){
-					printf("Unalbe Read Image file:%s Exit...", elementSource);
+					printf("Unalbe Read Image file:%s Exit...\n", elementSource);
 					cJSON_Delete(layout);
 					free(buf);
 					return -1;
@@ -182,7 +206,7 @@ int main(int argc, char* argv[]){
 	DfuSuffixType* suffix = ENTRY(DfuSuffixType*, buf, offset);
 	offset +=Dfu_AddSuffix(prefix, suffix, bcd,  pid, vid);
 	
-	FILE *out = fopen("out.dfu", "w");
+	FILE *out = fopen(outputFile, "w");
 	if(!out){
 		printf("Unable write to output file!\n");
 	}else

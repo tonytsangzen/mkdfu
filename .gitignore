@@ -1,0 +1,10 @@
+*.log
+*.status
+*.m4
+*.o
+*.in
+*.suo
+*.user
+*.opensdf
+*.sdf
+*~
