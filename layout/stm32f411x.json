@@ -1,0 +1,28 @@
+{
+	"MaxSize":1024576,
+	"bcdDevice":"0xFFFF",
+	"VID":"0xFFFF",
+	"PID":"0xFFFF",
+	"bcdDFU":"0x11A",
+	"target":[{
+				"name":"Internal Flash",
+				"alternatesetting":"0",
+				"element":[
+					{"name":"bootloader","source":"bootloader.bin",   "address":"0x8000000","size":"0x4000", "essential":true},
+					{"name":"nvram",	 "source":"nvram.bin",		  "address":"0x8004000","size":"0x4000", "essential":false},
+					{"name":"backup",	 "source":"firmware.gz",	  "address":"0x8008000","size":"0x18000","essential":true},
+					{"name":"firmware",	 "source":"firmware.bin",	  "address":"0x8020000","size":"0x60000","essential":false}
+			 	]
+			 },
+	 		 {
+				"name":"Option Bytes",
+				"alternatesetting":"1",
+				 "element":[{"name":"option","source":"option.bin","address":"0x1FFFC000","size":"16","essential":false}]
+			 },
+	 		{
+				"name":"OTP Memory",
+				"alternatesetting":"2",
+				 "element":[{"name":"otp","source":"otp.bin","address":"0x1FFF7800","size":"512","essential":false}]
+			 }
+	 ]
+}
